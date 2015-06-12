@@ -1,0 +1,30 @@
+web:
+  image: triptyk/nginx
+  ports:
+    - "80:80"
+  volumes:
+    - ./environment/vhost.conf:/etc/nginx/sites-enabled/default
+    - ./www:/var/www
+  links:
+    - php
+php:
+  image: nmcteam/php56
+  volumes:
+    - ./environment/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
+    - ./www:/var/www
+    - ./logs/acess.log:/usr/log/www.access.log
+  links:
+    - db
+db:
+  image: sameersbn/mysql
+  ports:
+    - "3306:3306"
+  volumes:
+   - ./db/mysql/data:/var/lib/mysql
+  environment:
+   - DB_REMOTE_ROOT_NAME=admin
+   - DB_REMOTE_ROOT_PASS=admin
+   - DB_REMOTE_ROOT_HOST=0.0.0.0
+   - DB_NAME=triptykDb
+   - DB_USER=triptyk
+   - DB_PASS=azertyui
