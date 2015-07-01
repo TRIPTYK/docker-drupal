@@ -1,4 +1,4 @@
-db/mysql/data
+db/
 logs/
 www/default/
 backup/
