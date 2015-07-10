@@ -13,5 +13,6 @@ web:
   volumes:
     - ./environment/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
     - ./www:/var/www
+    - ./logs:/var/log/apache2
   links:
     - db
